@@ -1,5 +1,6 @@
 package Utilities;
 
+import PageObjects.ClientsPage;
 import PageObjects.LoginPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -16,6 +17,10 @@ public abstract class Base {
     public static String name;
     static String timeStamp = new SimpleDateFormat("yyyy-MM-dd/HH-mm-ss").format(Calendar.getInstance().getTime());
 
+    public static String url = System.getProperty("url"); // Initialize as parameter - URL to run
+
+    public static String browser = System.getProperty("browser"); // Initialize browser
     // Initialize Web pages with elements
     public static LoginPage loginPage;
+    public static ClientsPage clientsPage;
 }
