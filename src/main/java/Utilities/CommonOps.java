@@ -44,7 +44,7 @@ public class CommonOps extends Base{
     public void beforeTestMethod(Method method) {
         name = method.getAnnotation(Test.class).testName();
         test = extent.createTest(name);
-        driver.get(users().url());
+        driver.get(users().url() + "/business/auth/signin.html");
     }
 
     // TestNG annotation runs after every test method and perform everything we need to do after each test

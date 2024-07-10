@@ -4,9 +4,7 @@ import Extensions.*;
 import Utilities.Base;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import static PageObjects.ClientsPage.addNewClient;
-import static org.testng.Assert.fail;
 
 public class LoginPage extends Base {
 
@@ -25,15 +23,15 @@ public class LoginPage extends Base {
 
     // Sign in workflow using current class elements
     public static void signIn(String email, String password) {
-        Update.text(emailField, email,"Email field", 5000);
-        Update.text(passwordField, password,"Password field", 5000);
-        Click.go(logInButton, "Login button", 7500);
-        Verify.elementExists(firmDropDown, "Firm drop down", 5000);
+        Update.text(emailField, email,"Email field");
+        Update.text(passwordField, password,"Password field");
+        Click.go(logInButton, "Login button");
+        Verify.elementExists(firmDropDown, "Firm drop down");
     }
 
     public static void selectFirm(String visibleText) {
-        SelectFromDD.byVisibleText(firmDropDown, visibleText, "Firm drop down", 5000);
-        Click.go(logInButton, "Login button", 7500);
-        Verify.elementExists(addNewClient, "Add new client button", 5000);
+        SelectFromDD.byVisibleText(firmDropDown, visibleText, "Firm drop down");
+        Click.go(logInButton, "Login button");
+        Verify.elementExists(addNewClient, "Add new client button");
     }
 }

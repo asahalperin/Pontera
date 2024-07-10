@@ -1,66 +1,98 @@
 package PageObjects;
 
-import Extensions.Click;
-import Extensions.SelectFromDD;
-import Extensions.Update;
+import Extensions.*;
+import Interfaces.Users;
 import Utilities.Base;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
+
+import static Utilities.CommonOps.users;
 
 public class ClientsPage extends Base {
 
     @FindBy(id = "addNewClientBtnId")
-    public static WebElement addNewClient;
+    static WebElement addNewClient;
 
     @FindBy(id = "first_name")
-    private static WebElement firstNameField;
+    static WebElement firstNameField;
 
     @FindBy(id = "last_name")
-    private static WebElement lastNameField;
+    static WebElement lastNameField;
 
     @FindBy(id = "ssn")
-    private static WebElement ssnField;
+    static WebElement ssnField;
 
     @FindBy(id = "email")
-    private static WebElement emailField;
+    static WebElement emailField;
 
     @FindBy(id = "contactPhone")
-    private static WebElement mobilePhoneField;
+    static WebElement mobilePhoneField;
 
     @FindBy(id = "city")
-    private static WebElement cityField;
+    static WebElement cityField;
 
     @FindBy(xpath = "//div[text()='Select state']")
-    private static WebElement stateOptions;
+    static WebElement stateOptions;
 
     @FindBy(xpath = "//div[text()='Select Advisor']")
-    private static WebElement advisorDropDown;
+    static WebElement advisorDropDown;
 
     @FindBy(id = "save-client-changes-btn")
-    private static WebElement addClientButton;
+    static WebElement addClientButton;
 
     @FindBy(id = "beadcrumbs-email-li-id")
-    private static WebElement beadcrumbsEmail;
+    static WebElement beadcrumbsEmail;
 
     @FindBy(xpath = "//option[text()='Alabama']")
-    private static WebElement alabama;
+    static WebElement alabama;
 
     @FindBy(xpath = "//option[text()='Maayan Tester1']")
-    private static WebElement maayanTester1;
+    static WebElement maayanTester1;
 
-    public static void addClient(String firstName, String lastName, String ssn, String email, String mobilePhone, String city, String state, String advisorName) {
-        Click.go(addNewClient, "Add new client button", 5000);
-        Update.text(firstNameField, firstName, "First name field", 5000);
-        Update.text(lastNameField, lastName, "Last name field", 5000);
-        Update.text(ssnField, ssn, "SSN field", 5000);
-        Update.text(emailField, email, " Email field", 5000);
-        Update.text(mobilePhoneField, mobilePhone, "Mobile phone field", 5000);
-        Update.text(cityField, city, "City field", 5000);
-        Click.go(stateOptions,"State options button", 5000);
-        Click.go(alabama, "Alabama", 5000);
-        Click.go(advisorDropDown, "Advisor name options", 5000);
-        Click.go(maayanTester1, "Maayan Tester1", 5000);
-        Click.go(addClientButton, "Add client button", 7500);
+    @FindBy(xpath = "//span[text() = 'Name:']/following-sibling::*")
+    static WebElement finalClientName;
+
+    @FindBy(xpath = "//*[@id='my-clients']/table/tbody/tr/td/a")
+    static List<WebElement> clients;
+
+    @FindBy(id = "some-input")
+    static WebElement searchClientField;
+
+    public static void addClient(String firstName, String lastName) {
+        Click.go(addNewClient, "Add new client button");
+        Update.text(firstNameField, firstName, "First name field");
+        Update.text(lastNameField, lastName, "Last name field");
+        Update.text(ssnField, "111111111", "SSN field");
+        Update.text(emailField, users().clientEmail(), " Email field");
+        Update.text(mobilePhoneField, users().mobilePhone(), "Mobile phone field");
+        Update.text(cityField, users().city(), "City field");
+        Click.go(stateOptions,"State options button");
+        Click.go(alabama, "Alabama");
+        Click.go(advisorDropDown, "Advisor name options");
+        Click.go(maayanTester1, "Maayan Tester1");
+        Click.go(addClientButton, "Add client button");
+        Wait.untilElementTextIsNotEqual(finalClientName, "--");
+        Verify.textEqual(finalClientName, users().advisorFirstName() + " " + users().advisorLastName());
+    }
+
+    public static void verifyClientInGrid() {
+        boolean isEqual = true;
+        driver.get(users().url() + "/qaa/advisor/clients");
+        Wait.forElementIsClickable(searchClientField);
+        String clientText = null;
+        for (WebElement client : clients) {
+            clientText = client.getText();
+            if (!clientText.equals(users().advisorFirstName() + " " + users().advisorLastName())) {
+                isEqual = false;
+            } else {
+                isEqual = true;
+                break;
+            }
+        }
+        Verify.generalBoolean(isEqual, "New client name: '" + users().advisorFirstName() + "a " + users().advisorLastName() + "' exist in client grid");
     }
 
 }

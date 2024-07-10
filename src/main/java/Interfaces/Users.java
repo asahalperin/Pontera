@@ -13,6 +13,7 @@ public interface Users extends Config{
     String user();
     String url();
     String email();
+    String clientEmail();
     String password();
     String firm();
     String advisorFirstName();

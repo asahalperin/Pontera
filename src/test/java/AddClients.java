@@ -3,7 +3,6 @@ import PageObjects.LoginPage;
 import Utilities.CommonOps;
 import org.testng.annotations.Test;
 
-
 public class AddClients extends CommonOps {
 
     // Validate new client is added = Valid
@@ -11,7 +10,8 @@ public class AddClients extends CommonOps {
     public static void addNewClientValid() {
         LoginPage.signIn(users().email(), users().password());
         LoginPage.selectFirm(users().firm());
-        ClientsPage.addClient(users().advisorFirstName(), users().advisorLastName(), users().ssn(), users().email(), users().mobilePhone(), users().city(), users().state(), users().advisorName());
+        ClientsPage.addClient(users().advisorFirstName(), users().advisorLastName());
+        ClientsPage.verifyClientInGrid();
     }
 
 //    // Validate new client is added = InValid email

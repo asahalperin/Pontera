@@ -11,9 +11,9 @@ import static org.testng.Assert.fail;
 public class Verify extends Base {
 
     //TestNG assertion with error handling and write to log
-    public static void elementExists(WebElement elem, String elemName, int millisSeconds) {
+    public static void elementExists(WebElement elem, String elemName) {
         try {
-            Wait.ForElementIsClickable(elem, millisSeconds);
+            Wait.forElementIsClickable(elem);
             assertTrue(elem.isDisplayed());
             test.log(Status.PASS, "Step passed - Element " + elemName + " is displayed.");
         } catch (AssertionError e) {
@@ -21,6 +21,33 @@ public class Verify extends Base {
             fail(e + "Step failed - Error while Asserting element: " + elemName + " display");
         } catch (Exception e) {
             fail(e + "Step failed - Assert Element" + elemName + " Exists");
+        }
+    }
+
+    public static void textEqual(WebElement elem, String expectedText) {
+        String actualText = null;
+        try {
+            Wait.forElementIsClickable(elem);
+            actualText = elem.getText();
+            assertTrue(actualText.equals(expectedText));
+            test.log(Status.PASS, "Step passed - Text from element is: '" + actualText + "', as expected");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL, "Step failed - Text from element is: '" + actualText + "', and not as expected: '" + expectedText + "'", screenShot());
+            fail(e + "Step failed - Text is not equal");
+        } catch (Exception e) {
+            fail(e + "Step failed");
+        }
+    }
+
+    public static void generalBoolean(boolean bool, String text) {
+        try {
+            assertTrue(bool);
+            test.log(Status.PASS, "Step passed -" + text + " - True");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL, "Step failed -" + text + " - False", screenShot());
+            fail(e + "Step failed");
+        } catch (Exception e) {
+            fail(e + "Step failed");
         }
     }
 }
