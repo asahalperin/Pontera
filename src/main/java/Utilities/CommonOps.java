@@ -7,6 +7,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -21,12 +22,17 @@ public class CommonOps extends Base{
     // TestNG annotation runs before test suite XML and perform everything we need to do before the test run
     @BeforeSuite
     public void startSuite() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        driver.navigate().refresh();
-        ManagePages.initWeb();
+        if (users().platform().equals("UI")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
+            driver.navigate().refresh();
+            ManagePages.initWeb();
+        }
+//        else if (users().platform().equals("API")) {
+//            RestAssured.baseURI = users().url();
+//        }
         extent = new ExtentReports();
         extentSparkReporter = new ExtentSparkReporter("Reports/" + timeStamp + "/Report.html");
         extent.attachReporter(extentSparkReporter);
@@ -35,7 +41,8 @@ public class CommonOps extends Base{
     // TestNG annotation runs after test suite XML and perform everything we need to do after the test run
     @AfterSuite
     public void afterTestSuite() {
-        driver.close();
+        if (users().platform().equals("UI"))
+            driver.close();
         extent.flush();
     }
 
@@ -44,7 +51,9 @@ public class CommonOps extends Base{
     public void beforeTestMethod(Method method) {
         name = method.getAnnotation(Test.class).testName();
         test = extent.createTest(name);
-        driver.get(users().url() + "/business/auth/signin.html");
+        if (users().platform().equals("UI")) {
+            driver.get(users().url() + "/business/auth/signin.html");
+        }
     }
 
     // TestNG annotation runs after every test method and perform everything we need to do after each test
@@ -65,7 +74,7 @@ public class CommonOps extends Base{
         return storedImage;
     }
 
-    // Method collect user data from properties file throw Users interface
+    // Method to collect user data from properties file throw Users interface
     public static Users users() {
         return ConfigFactory.create(Users.class);
     }

@@ -1,5 +1,6 @@
-package Extensions;
+package Extensions.UI;
 
+import Extensions.Wait;
 import Utilities.Base;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.JavascriptExecutor;

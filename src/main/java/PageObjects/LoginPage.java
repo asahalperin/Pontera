@@ -1,6 +1,9 @@
 package PageObjects;
 
 import Extensions.*;
+import Extensions.UI.Click;
+import Extensions.UI.SelectFromDD;
+import Extensions.UI.Update;
 import Utilities.Base;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

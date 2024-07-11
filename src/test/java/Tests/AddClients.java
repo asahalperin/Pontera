@@ -1,3 +1,5 @@
+package Tests;
+
 import PageObjects.ClientsPage;
 import PageObjects.LoginPage;
 import Utilities.CommonOps;

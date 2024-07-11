@@ -24,7 +24,7 @@ public class Verify extends Base {
         }
     }
 
-    public static void textEqual(WebElement elem, String expectedText) {
+    public static void elementTextEqual(WebElement elem, String expectedText) {
         String actualText = null;
         try {
             Wait.forElementIsClickable(elem);
@@ -46,6 +46,18 @@ public class Verify extends Base {
         } catch (AssertionError e) {
             test.log(Status.FAIL, "Step failed -" + text + " - False", screenShot());
             fail(e + "Step failed");
+        } catch (Exception e) {
+            fail(e + "Step failed");
+        }
+    }
+
+    public static void textEqual(String actualText, String expectedText, String message) {
+        try {
+            assertTrue(actualText.equals(expectedText));
+            test.log(Status.PASS, message + " passed - Result is: '" + actualText + "', as expected");
+        } catch (AssertionError e) {
+            test.log(Status.FAIL, message + " failed - Result is: '" + actualText + "', - not as expected: '" + expectedText + "'");
+            fail(e + "Step failed - Text is not equal");
         } catch (Exception e) {
             fail(e + "Step failed");
         }

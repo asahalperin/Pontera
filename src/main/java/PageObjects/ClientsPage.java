@@ -1,9 +1,9 @@
 package PageObjects;
 
 import Extensions.*;
-import Interfaces.Users;
+import Extensions.UI.Click;
+import Extensions.UI.Update;
 import Utilities.Base;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -75,7 +75,7 @@ public class ClientsPage extends Base {
         Click.go(maayanTester1, "Maayan Tester1");
         Click.go(addClientButton, "Add client button");
         Wait.untilElementTextIsNotEqual(finalClientName, "--");
-        Verify.textEqual(finalClientName, users().advisorFirstName() + " " + users().advisorLastName());
+        Verify.elementTextEqual(finalClientName, users().advisorFirstName() + " " + users().advisorLastName());
     }
 
     public static void verifyClientInGrid() {

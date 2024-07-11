@@ -1,0 +1,11 @@
+{
+  "firstname": "$RANDOM_FIRSTNAME",
+  "lastname": "$RANDOM_LASTNAME",
+  "totalprice": "$RANDOM_PRICE",
+  "depositpaid": "$RANDOM_DEPOSITPAID",
+  "bookingdates": {
+    "checkin": "$RANDOM_CHECKIN",
+    "checkout": "$RANDOM_CHECKOUT"
+  },
+  "additionalneeds": "Breakfast"
+}

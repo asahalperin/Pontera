@@ -9,6 +9,7 @@ import org.aeonbits.owner.Config.Sources;
         "classpath:Users/${user}.properties" // mention the property file name
 })
 public interface Users extends Config{
+    String platform();
     String env();
     String user();
     String url();
