@@ -3,7 +3,6 @@ package Extensions;
 import Utilities.Base;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebElement;
-
 import static Utilities.CommonOps.screenShot;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;

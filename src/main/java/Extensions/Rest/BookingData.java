@@ -17,7 +17,7 @@ public class BookingData {
         this.additionalneeds = additionalneeds;
     }
 
-    // Getters and setters
+     // Getters and setters
     public String getFirstname() {
         return firstname;
     }

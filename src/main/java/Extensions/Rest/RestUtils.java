@@ -5,13 +5,11 @@ import com.aventstack.extentreports.Status;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-
-import static Utilities.CommonOps.screenShot;
 import static Utilities.CommonOps.users;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-public class Utils extends Base {
+public class RestUtils extends Base {
 
     private static final String BASE_URL = users().url();
 

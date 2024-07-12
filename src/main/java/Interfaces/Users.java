@@ -17,8 +17,8 @@ public interface Users extends Config{
     String clientEmail();
     String password();
     String firm();
-    String advisorFirstName();
-    String advisorLastName();
+    String firstName();
+    String lastName();
     String ssn();
     String mobilePhone();
     String city();

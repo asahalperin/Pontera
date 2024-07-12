@@ -7,7 +7,6 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.model.Media;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,7 +17,6 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 public class CommonOps extends Base{
-
     // TestNG annotation runs before test suite XML and perform everything we need to do before the test run
     @BeforeSuite
     public void startSuite() {
@@ -30,9 +28,6 @@ public class CommonOps extends Base{
             driver.navigate().refresh();
             ManagePages.initWeb();
         }
-//        else if (users().platform().equals("API")) {
-//            RestAssured.baseURI = users().url();
-//        }
         extent = new ExtentReports();
         extentSparkReporter = new ExtentSparkReporter("Reports/" + timeStamp + "/Report.html");
         extent.attachReporter(extentSparkReporter);
