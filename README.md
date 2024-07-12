@@ -9,7 +9,7 @@ Pontera assignment
 
 mvn clean compile test -DsuiteXmlFile=C:\Pontera\Pontera\src\test\resources\RunUi.xml -Duser=PonteraTest
 ### API Test
-#### To run API tests, use this Maven command on project root:
+#### To run API tests, use this Maven command on project root: 
 
 mvn clean compile test -DsuiteXmlFile=C:\Pontera\Pontera\src\test\resources\RunApi.xml -Duser=PonteraApi
 
