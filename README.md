@@ -20,4 +20,4 @@ Report created under project root directory/Reports - By date and time
 Delete Client can be individual test so i created new test for this purpose instead to delete it using After annotation. It's possible to delete data using Rest API Delete method
 
 ## Failures
-I added some failures (In comments under AddClients test clas) to se the screenshots and failures logs
+I added some failures (In comments under AddClients test class) to see the screenshots and failures logs
