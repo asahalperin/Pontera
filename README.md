@@ -5,13 +5,13 @@ Pontera assignment
 ## Running Tests
 
 ### UI Test
-#### To run UI tests, use this Maven command on project root:
+#### To run UI tests, use this Maven command on project root. Yoy can choose browser at the end (Parameter Dbrowser = chrome / edge / firefox)
 
-mvn clean compile test -DsuiteXmlFile=C:\Pontera\Pontera\src\test\resources\RunUi.xml -Duser=PonteraTest
+mvn clean compile test -DsuiteXmlFile=src\test\resources\RunUi.xml -Duser=PonteraTest -Dbrowser=chrome
 ### API Test
 #### To run API tests, use this Maven command on project root: 
 
-mvn clean compile test -DsuiteXmlFile=C:\Pontera\Pontera\src\test\resources\RunApi.xml -Duser=PonteraApi
+mvn clean compile test -DsuiteXmlFile=src\test\resources\RunApi.xml -Duser=PonteraApi
 
 ## Reports
 Report created under project root directory/Reports - By date and time

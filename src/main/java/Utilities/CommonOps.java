@@ -11,6 +11,8 @@ import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
@@ -22,7 +24,17 @@ public class CommonOps extends Base{
     public void startSuite() {
         if (users().platform().equals("UI")) {
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            switch (browser) {
+                case "chrome":
+                    driver = new ChromeDriver();
+                    break;
+                case "edge":
+                    driver = new EdgeDriver();
+                    break;
+                case "firefox":
+                    driver = new FirefoxDriver();
+                    break;
+            }
             driver.manage().window().maximize();
             driver.manage().deleteAllCookies();
             driver.navigate().refresh();
